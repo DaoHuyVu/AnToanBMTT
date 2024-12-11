@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">AnToanBMTT</string>
+    <string name="login_page_title">Log in</string>
+    <string name="email_hint">Email</string>
+    <string name="password_hint">Password</string>
+    <string name="forgot_password">Forgot your password?</string>
+    <string name="login_btn">Log in</string>
+    <string name="new_user">New user?</string>
+    <string name="sign_up">Sign up</string>
+    <string name="sign_up_btn">Sign up</string>
+    <string name="sign_up_page_title">Sign up</string>
+    <string name="Name_field">Name</string>
+    <string name="confirm_password">Confirm password</string>
+</resources>
