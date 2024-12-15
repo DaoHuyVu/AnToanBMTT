@@ -1,14 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.fragment.app.FragmentContainerView
+<androidx.drawerlayout.widget.DrawerLayout
+    android:id="@+id/drawer_layout"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/nav_host_fragment"
-    android:name="androidx.navigation.fragment.NavHostFragment"
-    app:defaultNavHost="true"
     android:layout_width="match_parent"
-    tools:layout="@layout/fragment_login"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:openDrawer="start">
 
-</androidx.fragment.app.FragmentContainerView>
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/Widget.MaterialComponents.AppBarLayout.PrimarySurface">
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/topAppbar"
+                android:layout_width="match_parent"
+                tools:title="@string/home_nav_title"
+                app:titleTextAppearance="@style/TextAppearance.Material3.TitleMedium"
+                android:layout_height="?attr/actionBarSize"
+                style="@style/ThemeOverlay.MaterialComponents.Toolbar.Primary"/>
+        </com.google.android.material.appbar.AppBarLayout>
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/nav_host_fragment"
+            android:name="androidx.navigation.fragment.NavHostFragment"
+            app:defaultNavHost="true"
+            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+            android:layout_width="match_parent"
+            tools:layout="@layout/fragment_home"
+            android:layout_height="match_parent"
+            app:navGraph="@navigation/nav_graph"
+            tools:context=".MainActivity">
+        </androidx.fragment.app.FragmentContainerView>
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottom_nav_view"
+            android:layout_width="match_parent"
+            style="@style/Widget.MaterialComponents.BottomNavigationView.Colored"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            app:menu="@menu/bottom_menu"/>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/navigation_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        app:menu="@menu/navigation_menu"
+        app:itemHorizontalPadding="16dp"
+        app:itemVerticalPadding="16dp"
+        app:headerLayout="@layout/drawer_app_header">
+    </com.google.android.material.navigation.NavigationView>
+</androidx.drawerlayout.widget.DrawerLayout>

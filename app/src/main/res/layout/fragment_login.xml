@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.LoginFragment"
+    tools:context=".ui.login.LoginFragment"
     android:padding="16dp">
 
     <TextView
@@ -86,13 +86,12 @@
         app:layout_constraintStart_toStartOf="@+id/login_btn"
         app:layout_constraintTop_toBottomOf="@id/login_btn" />
     <TextView
-        android:id="@+id/sign_up"
+        android:id="@+id/signUp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="@id/new_user"
         android:text="@string/sign_up"
         android:textColor="@color/purple_700"
         app:layout_constraintStart_toEndOf="@id/new_user"
-        android:layout_marginStart="12dp"
-        />
+        android:layout_marginStart="12dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

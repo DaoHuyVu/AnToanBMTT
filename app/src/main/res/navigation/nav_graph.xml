@@ -3,28 +3,37 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/loginFragment">
+    app:startDestination="@id/homeFragment">
 
     <fragment
-        android:id="@+id/loginFragment"
-        android:name="com.example.antoanbmtt.ui.LoginFragment"
-        android:label="fragment_login"
-        tools:layout="@layout/fragment_login" >
-        <action
-            android:id="@+id/action_loginFragment_to_signUpFragment"
-            app:destination="@id/signUpFragment" />
-        <action
-            android:id="@+id/action_loginFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
+        android:id="@+id/homeFragment"
+        android:name="com.example.antoanbmtt.ui.navigation.home.HomeFragment"
+        android:label="Home"
+        tools:layout="@layout/fragment_home" >
     </fragment>
     <fragment
-        android:id="@+id/homeFragment"
-        android:name="com.example.antoanbmtt.ui.HomeFragment"
-        android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        android:id="@+id/cloudStorageFragment"
+        android:name="com.example.antoanbmtt.ui.navigation.cloud.CloudStorageFragment"
+        android:label="CloudStorage"
+        tools:layout="@layout/fragment_cloud_storage" />
     <fragment
-        android:id="@+id/signUpFragment"
-        android:name="com.example.antoanbmtt.ui.SignUpFragment"
-        android:label="fragment_sign_up"
-        tools:layout="@layout/fragment_sign_up" />
+        android:id="@+id/imageFragment"
+        android:name="com.example.antoanbmtt.ui.navigation.image.ImageFragment"
+        android:label="Image"
+        tools:layout="@layout/fragment_image" />
+    <fragment
+        android:id="@+id/shareFragment"
+        android:name="com.example.antoanbmtt.ui.navigation.share.ShareFragment"
+        android:label="Share"
+        tools:layout="@layout/fragment_share" />
+    <fragment
+        android:id="@+id/recycleBinFragment"
+        android:name="com.example.antoanbmtt.ui.navigation.bin.RecycleBinFragment"
+        android:label="RecycleBin"
+        tools:layout="@layout/fragment_recycle_bin" />
+    <fragment
+        android:id="@+id/userInfoFragment"
+        android:name="com.example.antoanbmtt.ui.navigation.info.UserInfoFragment"
+        android:label=" "
+        tools:layout="@layout/fragment_user_info" />
 </navigation>

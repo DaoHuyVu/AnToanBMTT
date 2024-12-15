@@ -11,4 +11,15 @@
     <string name="sign_up_page_title">Sign up</string>
     <string name="Name_field">Name</string>
     <string name="confirm_password">Confirm password</string>
+    <string name="home_nav_title">Home</string>
+    <string name="cloud_storage_nav_title">Cloud storage</string>
+    <string name="shared_folder_nav_title">Share</string>
+    <string name="image_nav_title">Image</string>
+    <string name="my_account_nav_view_title">My account</string>
+    <string name="recycle_bin_nav_view_title">Recycle bin</string>
+    <string name="settings_nav_view_title">Settings</string>
+    <string name="drawer_user_info_user_icon">User icon</string>
+    <string name="search_label">Search</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
