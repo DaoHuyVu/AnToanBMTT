@@ -3,10 +3,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.antoanbmtt.api.ApiResponse
 import com.example.antoanbmtt.api.login.AccountService
 import com.example.antoanbmtt.api.login.LoginRequest
-import com.example.antoanbmtt.api.login.LoginResponse
 import com.example.antoanbmtt.repository.UserDataStore
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
