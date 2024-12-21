@@ -3,6 +3,8 @@ plugins {
     alias(libs.plugins.kotlin.android)
     id("androidx.navigation.safeargs.kotlin")
     kotlin("plugin.serialization") version "2.0.21"
+    id("com.google.dagger.hilt.android")
+    id("com.google.devtools.ksp")
 }
 
 android {
@@ -41,6 +43,17 @@ android {
 }
 
 dependencies {
+    // https://mvnrepository.com/artifact/androidx.lifecycle/lifecycle-viewmodel-ktx
+    runtimeOnly(libs.androidx.lifecycle.viewmodel.ktx)
+    implementation(libs.androidx.datastore.preferences)
+    // https://mvnrepository.com/artifact/com.squareup.retrofit2/converter-gson
+    implementation(libs.converter.gson)
+    // https://mvnrepository.com/artifact/androidx.fragment/fragment-ktx
+    runtimeOnly(libs.androidx.fragment.ktx)
+    // https://mvnrepository.com/artifact/com.squareup.retrofit2/retrofit
+    implementation(libs.retrofit2.retrofit)
+    ksp(libs.hilt.android.compiler)
+    implementation(libs.hilt.android)
     implementation(libs.androidx.navigation.runtime.ktx)
     implementation(libs.androidx.navigation.fragment)
     implementation(libs.androidx.navigation.ui)

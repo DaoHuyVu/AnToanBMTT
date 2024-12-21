@@ -14,7 +14,7 @@
     <fragment
         android:id="@+id/cloudStorageFragment"
         android:name="com.example.antoanbmtt.ui.navigation.cloud.CloudStorageFragment"
-        android:label="CloudStorage"
+        android:label="Cloud Storage"
         tools:layout="@layout/fragment_cloud_storage" />
     <fragment
         android:id="@+id/imageFragment"
@@ -29,7 +29,7 @@
     <fragment
         android:id="@+id/recycleBinFragment"
         android:name="com.example.antoanbmtt.ui.navigation.bin.RecycleBinFragment"
-        android:label="RecycleBin"
+        android:label="Recycle Bin"
         tools:layout="@layout/fragment_recycle_bin" />
     <fragment
         android:id="@+id/userInfoFragment"

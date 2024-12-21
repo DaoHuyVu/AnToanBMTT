@@ -5,7 +5,9 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.antoanbmtt.databinding.ActivityLoginBinding
 import com.example.antoanbmtt.ui.login.LoginFragment.UserScreenEntryPoint
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class LoginActivity : AppCompatActivity(), UserScreenEntryPoint {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
