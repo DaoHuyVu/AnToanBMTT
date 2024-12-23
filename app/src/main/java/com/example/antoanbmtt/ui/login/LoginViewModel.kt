@@ -1,4 +1,5 @@
 package com.example.antoanbmtt.ui.login
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -39,9 +40,7 @@ class LoginViewModel @Inject constructor(
                 val response = accountService.login(LoginRequest(_loginState.value!!.userName!!.trim(),_loginState.value!!.password!!.trim()))
                 if(response.isSuccessful){
                     val successResponse = response.body()
-                    dataStore.addEmail(successResponse!!.email)
-                    dataStore.addUserName(successResponse.userName)
-                    dataStore.addAccessToken(successResponse.accessToken)
+                    dataStore.saveUserInfo(successResponse!!.userInfo.email,successResponse.userInfo.userName,successResponse.accessToken)
                     _loginState.value = _loginState.value?.copy(isLoading = false, isLoginSuccessfully = true)
                 }
                 else{

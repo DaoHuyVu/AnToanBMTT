@@ -3,6 +3,7 @@ package com.example.antoanbmtt
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -18,18 +19,18 @@ import javax.inject.Inject
 @SuppressLint("CustomSplashScreen")
 @AndroidEntryPoint
 class SplashActivity : AppCompatActivity() {
-    @Inject private lateinit var dataStore : UserDataStore
+    @Inject lateinit var dataStore : UserDataStore
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
         lifecycleScope.launch {
             delay(1000)
-            val email = dataStore.emailFlow.first()
-            if(email.isNotEmpty()){
-                startActivity(Intent(this@SplashActivity,MainActivity::class.java))
+            val email = dataStore.getEmail()
+            if(email.isNullOrEmpty()){
+                startActivity(Intent(this@SplashActivity,LoginActivity::class.java))
             }
             else
-                startActivity(Intent(this@SplashActivity,LoginActivity::class.java))
+                startActivity(Intent(this@SplashActivity,MainActivity::class.java))
             finish()
         }
     }
