@@ -53,6 +53,9 @@ class LoginFragment : Fragment() {
                 viewModel.passwordChange(it)
             })
             viewModel.loginState.observe(viewLifecycleOwner){ uiState ->
+                if(uiState.isLoginSuccessfully){
+                    userScreenEntryPoint!!.toUserScreen()
+                }
                 if(uiState.isLoading){
                     progressBar.visibility = View.VISIBLE
                     loginBtn.isEnabled = false
@@ -79,9 +82,7 @@ class LoginFragment : Fragment() {
                     showToast(it)
                     viewModel.messageShown()
                 }
-                if(uiState.isLoginSuccessfully){
-                    userScreenEntryPoint!!.toUserScreen()
-                }
+
             }
         }
 

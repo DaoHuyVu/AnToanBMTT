@@ -46,7 +46,7 @@ class SignUpViewModel @Inject constructor(
             if(_signUpUiState.value?.confirmPassword?.equals(_signUpUiState.value?.password) == false){
                 _signUpUiState.value = _signUpUiState.value?.copy(confirmPasswordNotMatch = true)
             }else{
-                _signUpUiState.value = _signUpUiState.value?.copy(isLoading = true, confirmPasswordNotMatch = true)
+                _signUpUiState.value = _signUpUiState.value?.copy(isLoading = true, confirmPasswordNotMatch = false)
                 viewModelScope.launch {
                     val response = accountService.signUp(SignUpRequest(_signUpUiState.value!!.userName!!.trim(),_signUpUiState.value!!.email!!.trim(),_signUpUiState.value!!.password!!.trim()))
                     if(response.isSuccessful){

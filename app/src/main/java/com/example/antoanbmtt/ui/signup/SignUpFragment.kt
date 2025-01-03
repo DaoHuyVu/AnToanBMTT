@@ -46,6 +46,9 @@ class SignUpFragment : Fragment() {
                 viewModel.userNameChange(it)
             })
             viewModel.signUpUiState.observe(viewLifecycleOwner){ uiState ->
+                if(uiState.isSignUpSuccessfully){
+                    showToast("Sign up successfully\n Verify your email to activate the account")
+                }
                 if(uiState.isLoading){
                     progressBar.visibility = View.VISIBLE
                     signUpBtn.isEnabled = false
@@ -91,9 +94,6 @@ class SignUpFragment : Fragment() {
                 uiState.message?.let{
                     showToast(it)
                     viewModel.messageShown()
-                }
-                if(uiState.isSignUpSuccessfully){
-                    showToast("Sign up successfully\n Verify your email to activate the account")
                 }
             }
         }
