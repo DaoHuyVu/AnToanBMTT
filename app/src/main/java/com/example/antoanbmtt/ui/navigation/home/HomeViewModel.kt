@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.antoanbmtt.api.ApiResult
 import com.example.antoanbmtt.api.resource.ResourceContent
-import com.example.antoanbmtt.repository.ResourceRepository
+import com.example.antoanbmtt.repository.resource.ResourceRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import okhttp3.MultipartBody

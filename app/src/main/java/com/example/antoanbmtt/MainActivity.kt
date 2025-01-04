@@ -13,19 +13,33 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.antoanbmtt.databinding.ActivityMainBinding
+import com.example.antoanbmtt.databinding.DrawerAppHeaderBinding
+import com.example.antoanbmtt.repository.UserDataStore
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private lateinit var binding : ActivityMainBinding
     private lateinit var controller  : NavController
     private lateinit var appBarConfiguration: AppBarConfiguration
+    @Inject lateinit var userDataStore: UserDataStore
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setUpNavigation()
         setUpUIComponent()
+        bindUserDataToDrawer()
+    }
+    private fun bindUserDataToDrawer(){
+     val headerView = binding.navigationView.getHeaderView(0)
+        val headerLayout = DrawerAppHeaderBinding.bind(headerView)
+        headerLayout.apply {
+            userName.text = userDataStore.getUserName()
+            userEmail.text = userDataStore.getEmail()
+        }
+
     }
     private fun setUpUIComponent(){
         binding.apply{

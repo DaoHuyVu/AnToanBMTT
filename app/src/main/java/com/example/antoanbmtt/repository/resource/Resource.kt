@@ -1,8 +1,7 @@
-package com.example.antoanbmtt.repository
-
-import java.time.LocalDateTime
+package com.example.antoanbmtt.repository.resource
 
 data class Resource(
+    val id : Long,
     val name : String,
     val lastUpdate : String,
     val capacity : String,

@@ -9,10 +9,10 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.example.antoanbmtt.databinding.ResourceItemLayoutBinding
 import com.example.antoanbmtt.repository.resource.Resource
 
-class ResourceAdapter(
+class TempDeleteResourceAdapter(
     private val onClick : (String) -> Unit,
-    private val onShow : (Long,String,Boolean,Boolean) -> Unit
-) : ListAdapter<Resource,ResourceAdapter.ResourceViewHolder>(diffCallback){
+    private val onShow : (Long,Boolean) -> Unit
+) : ListAdapter<Resource,TempDeleteResourceAdapter.ResourceViewHolder>(diffCallback){
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ResourceViewHolder.create(parent)
     override fun onBindViewHolder(holder: ResourceViewHolder, position: Int) {
         holder.bind(getItem(position),onClick,onShow)
@@ -26,7 +26,7 @@ class ResourceAdapter(
                 return ResourceViewHolder(binding)
             }
         }
-        fun bind(resource: Resource, onClick: (String) -> Unit, onShow: (Long,String,Boolean,Boolean) -> Unit){
+        fun bind(resource: Resource, onClick: (String) -> Unit, onShow: (Long,Boolean) -> Unit){
             binding.apply {
                 resourceItem.setOnClickListener{
                     onClick.invoke(resource.uri)
@@ -37,8 +37,6 @@ class ResourceAdapter(
                 buttonMore.setOnClickListener {
                     onShow.invoke(
                         resource.id,
-                        resource.uri,
-                        resource.isFavourite,
                         resource.isTempDelete
                     )
                 }
