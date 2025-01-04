@@ -45,9 +45,8 @@ class MainActivity : AppCompatActivity() {
         binding.apply{
             setSupportActionBar(topAppbar)
             appBarConfiguration = AppBarConfiguration(
-                setOf(R.id.homeFragment,
-                    R.id.shareFragment,
-                    R.id.imageFragment,
+                setOf(R.id.shareFragment,
+                    R.id.homeFragment,
                     R.id.cloudStorageFragment),
                 drawerLayout
             )

@@ -17,11 +17,6 @@
         android:label="Cloud Storage"
         tools:layout="@layout/fragment_cloud_storage" />
     <fragment
-        android:id="@+id/imageFragment"
-        android:name="com.example.antoanbmtt.ui.navigation.image.ImageFragment"
-        android:label="Image"
-        tools:layout="@layout/fragment_image" />
-    <fragment
         android:id="@+id/shareFragment"
         android:name="com.example.antoanbmtt.ui.navigation.share.ShareFragment"
         android:label="Share"

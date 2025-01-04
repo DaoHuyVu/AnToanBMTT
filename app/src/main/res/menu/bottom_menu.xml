@@ -3,22 +3,16 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/homeFragment"
-        android:title="@string/home_nav_title"
-        android:icon="@drawable/mega_logo"
-        android:enabled="true"/>
-    <item
         android:id="@+id/cloudStorageFragment"
         android:title="@string/cloud_storage_nav_title"
         android:icon="@drawable/baseline_folder_24"
         android:enabled="true"
         />
     <item
-        android:id="@+id/imageFragment"
-        android:title="@string/image_nav_title"
-        android:icon="@drawable/baseline_image_24"
+        android:id="@+id/homeFragment"
+        android:title="@string/home_nav_title"
+        android:icon="@drawable/mega_logo"
         android:enabled="true"/>
-
     <item
         android:id="@+id/shareFragment"
         android:title="@string/shared_folder_nav_title"
