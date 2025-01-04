@@ -91,9 +91,9 @@ class CloudStorageFragment : Fragment() {
                 adapter.submitList(it.resources)
             }
             viewModel.resourceContent.observe(viewLifecycleOwner){
-                it.base64Content?.let{ content ->
+                it.content?.let{ content ->
                     val file = File(requireContext().cacheDir,it.uri!!)
-                    Util.decodeBase64ToFile(content,file)
+                    Util.writeToFile(content,file)
                     Util.openCacheFile(requireContext(),it.uri,Util.getMimeType(it.uri)!!)
                     viewModel.resetContent()
                 }

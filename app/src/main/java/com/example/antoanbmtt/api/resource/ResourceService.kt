@@ -1,6 +1,7 @@
 package com.example.antoanbmtt.api.resource
 
 import okhttp3.MultipartBody
+import okhttp3.ResponseBody
 import retrofit2.Response
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
@@ -22,7 +23,7 @@ interface ResourceService {
     @GET("resource/{uri}")
     suspend fun getResourceContent(
         @Path("uri") uri : String
-    ) : Response<ResourceContent>
+    ) : Response<ResponseBody>
     @PATCH("resource")
     @FormUrlEncoded
     suspend fun updateResourceInfo(

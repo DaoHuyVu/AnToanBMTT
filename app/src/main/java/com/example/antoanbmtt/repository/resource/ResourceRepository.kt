@@ -68,7 +68,7 @@ class ResourceRepository @Inject constructor(
         return withContext(Dispatchers.IO){
             val response = resourceService.getResourceContent(uri)
             if(response.isSuccessful){
-                ApiResult.Success(response.body()!!)
+                ApiResult.Success(ResourceContent(uri,response.body()!!))
             }
             else if(response.code() in 400..499)
                 ApiResult.Failure("Can't get resource content")

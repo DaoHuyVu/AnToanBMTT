@@ -15,12 +15,14 @@ import okhttp3.RequestBody
 import java.io.ByteArrayOutputStream
 import android.content.Context
 import android.content.Intent
-import android.os.Build
 import android.util.Base64
 import android.webkit.MimeTypeMap
 import androidx.core.content.FileProvider
+import okhttp3.ResponseBody
+import retrofit2.http.Multipart
 import java.io.File
 import java.io.FileOutputStream
+import java.io.IOException
 
 class Util{
     companion object{
@@ -34,7 +36,6 @@ class Util{
             inputStream.close()
             return part
         }
-
         fun generatePdfThumbnail(contentResolver: ContentResolver, pdfUri: Uri): MultipartBody.Part? {
             try {
                 val fileDescriptor: ParcelFileDescriptor? = contentResolver.openFileDescriptor(pdfUri, "r")
@@ -83,6 +84,7 @@ class Util{
 
             return fileName
         }
+
         @SuppressLint("QueryPermissionsNeeded")
         fun openCacheFile(context: Context, fileName: String, mimeType: String) {
             val file = File(context.cacheDir, fileName) // Locate the file in the cache directory
@@ -111,20 +113,13 @@ class Util{
             val extension = fileName.substringAfterLast('.', "") // Extract the file extension
             return MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension.lowercase())
         }
-        fun decodeBase64ToFile(base64String: String, file : File): Boolean {
+        fun writeToFile(body: ResponseBody, file : File){
             return try {
-                // Decode Base64 string
-                val decodedBytes = Base64.decode(base64String, Base64.DEFAULT)
-
-                // Write bytes to file
-                FileOutputStream(file).use { outputStream ->
-                    outputStream.write(decodedBytes)
-                }
-                Log.d("decodeBase64","file created")
-                true // Success
-            } catch (e: Exception) {
+                val fos = FileOutputStream(file);
+                fos.write(body.bytes())
+                fos.close()
+            } catch (e: IOException) {
                 e.printStackTrace()
-                false // Error occurred
             }
         }
     }
