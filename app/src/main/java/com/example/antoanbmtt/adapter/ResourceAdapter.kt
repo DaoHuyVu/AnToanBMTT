@@ -11,7 +11,7 @@ import com.example.antoanbmtt.repository.resource.Resource
 
 class ResourceAdapter(
     private val onClick : (String) -> Unit,
-    private val onShow : (Long,String,Boolean,Boolean) -> Unit
+    private val onShow : (Long,String,Boolean,Boolean,String) -> Unit
 ) : ListAdapter<Resource,ResourceAdapter.ResourceViewHolder>(diffCallback){
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ResourceViewHolder.create(parent)
     override fun onBindViewHolder(holder: ResourceViewHolder, position: Int) {
@@ -26,7 +26,7 @@ class ResourceAdapter(
                 return ResourceViewHolder(binding)
             }
         }
-        fun bind(resource: Resource, onClick: (String) -> Unit, onShow: (Long,String,Boolean,Boolean) -> Unit){
+        fun bind(resource: Resource, onClick: (String) -> Unit, onShow: (Long,String,Boolean,Boolean,String) -> Unit){
             binding.apply {
                 resourceItem.setOnClickListener{
                     onClick.invoke(resource.uri)
@@ -39,7 +39,8 @@ class ResourceAdapter(
                         resource.id,
                         resource.uri,
                         resource.isFavourite,
-                        resource.isTempDelete
+                        resource.isTempDelete,
+                        resource.name
                     )
                 }
                 favorite.visibility = if(resource.isFavourite) View.VISIBLE else View.INVISIBLE

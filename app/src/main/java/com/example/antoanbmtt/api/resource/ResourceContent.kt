@@ -4,5 +4,5 @@ import okhttp3.ResponseBody
 
 data class ResourceContent(
     val uri : String? = null,
-    val content : ResponseBody? = null
+    val content : ResponseBody? = null,
 )

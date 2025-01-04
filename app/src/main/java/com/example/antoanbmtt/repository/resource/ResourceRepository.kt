@@ -1,6 +1,7 @@
 package com.example.antoanbmtt.repository.resource
 
 import com.example.antoanbmtt.api.ApiResult
+import com.example.antoanbmtt.api.resource.DownloadResourceContent
 import com.example.antoanbmtt.api.resource.ResourceContent
 import com.example.antoanbmtt.api.resource.ResourceResponse
 import com.example.antoanbmtt.api.resource.ResourceService
@@ -69,6 +70,17 @@ class ResourceRepository @Inject constructor(
             val response = resourceService.getResourceContent(uri)
             if(response.isSuccessful){
                 ApiResult.Success(ResourceContent(uri,response.body()!!))
+            }
+            else if(response.code() in 400..499)
+                ApiResult.Failure("Can't get resource content")
+            else ApiResult.Failure("Host error")
+        }
+    }
+    suspend fun downloadContent(uri : String,fileName : String) : ApiResult<DownloadResourceContent>{
+        return withContext(Dispatchers.IO){
+            val response = resourceService.getResourceContent(uri)
+            if(response.isSuccessful){
+                ApiResult.Success(DownloadResourceContent(uri,fileName,response.body()))
             }
             else if(response.code() in 400..499)
                 ApiResult.Failure("Can't get resource content")

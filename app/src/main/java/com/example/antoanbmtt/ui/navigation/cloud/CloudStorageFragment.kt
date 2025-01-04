@@ -4,6 +4,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.viewModels
@@ -51,9 +52,10 @@ class CloudStorageFragment : Fragment() {
                         viewModel.getResourceContent(uri)
                     }
                     else{
-                        Util.openCacheFile(requireContext(),uri,Util.getMimeType(uri)!!) }
+                        Util.openCacheFile(requireContext(),uri,Util.getMimeType(uri)!!)
+                    }
                 },
-                { id,uri,isFavourite,isTempDelete ->
+                { id,uri,isFavourite,isTempDelete,fileName ->
                     ResourceDetailsBottomSheetFragment(
                         isFavourite,
                         {
@@ -66,7 +68,14 @@ class CloudStorageFragment : Fragment() {
                             viewModel.updateTempDelete(id,!isTempDelete)
                         },
                         {
-
+                            val tempFile = File(requireContext().cacheDir,uri)
+                            if(!tempFile.exists()){
+                                viewModel.downloadContent(uri,fileName)
+                            }
+                            else{
+                                Util.downloadFromCacheFile(tempFile,fileName,requireContext())
+                                Toast.makeText(requireContext(),"Download successfully",Toast.LENGTH_SHORT).show()
+                            }
                         },
                         {
 
@@ -96,6 +105,13 @@ class CloudStorageFragment : Fragment() {
                     Util.writeToFile(content,file)
                     Util.openCacheFile(requireContext(),it.uri,Util.getMimeType(it.uri)!!)
                     viewModel.resetContent()
+                }
+            }
+            viewModel.downloadContent.observe(viewLifecycleOwner){
+                it.downloadContent?.let{ content ->
+                    Util.downloadFile(content.bytes(),it.fileName!!,requireContext())
+                    Toast.makeText(requireContext(),"Download successfully",Toast.LENGTH_SHORT).show()
+                    viewModel.resetDownloadContent()
                 }
             }
         }

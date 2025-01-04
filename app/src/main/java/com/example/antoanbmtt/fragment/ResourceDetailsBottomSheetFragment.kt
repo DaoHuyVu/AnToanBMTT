@@ -65,6 +65,7 @@ class ResourceDetailsBottomSheetFragment(
             }
             download.setOnClickListener {
                 dl.invoke()
+                dismiss()
             }
         }
     }
