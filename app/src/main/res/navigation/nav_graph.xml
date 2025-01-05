@@ -15,7 +15,11 @@
         android:id="@+id/cloudStorageFragment"
         android:name="com.example.antoanbmtt.ui.navigation.cloud.CloudStorageFragment"
         android:label="Cloud Storage"
-        tools:layout="@layout/fragment_cloud_storage" />
+        tools:layout="@layout/fragment_cloud_storage" >
+        <action
+            android:id="@+id/action_cloudStorageFragment_to_resourceDetailsFragment"
+            app:destination="@id/resourceDetailsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/shareFragment"
         android:name="com.example.antoanbmtt.ui.navigation.share.ShareFragment"
@@ -25,10 +29,23 @@
         android:id="@+id/recycleBinFragment"
         android:name="com.example.antoanbmtt.ui.navigation.bin.RecycleBinFragment"
         android:label="Recycle Bin"
-        tools:layout="@layout/fragment_recycle_bin" />
+        tools:layout="@layout/fragment_recycle_bin" >
+        <action
+            android:id="@+id/action_recycleBinFragment_to_resourceDetailsFragment"
+            app:destination="@id/resourceDetailsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/userInfoFragment"
         android:name="com.example.antoanbmtt.ui.navigation.info.UserInfoFragment"
         android:label="My account"
         tools:layout="@layout/fragment_user_info" />
+    <fragment
+        android:id="@+id/resourceDetailsFragment"
+        android:name="com.example.antoanbmtt.ui.navigation.details.ResourceDetailsFragment"
+        android:label="Details"
+        tools:layout="@layout/fragment_resource_details">
+        <argument
+            android:name="resourceId"
+            app:argType="long" />
+    </fragment>
 </navigation>

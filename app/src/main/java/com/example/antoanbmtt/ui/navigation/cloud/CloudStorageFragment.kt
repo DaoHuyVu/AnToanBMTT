@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.example.antoanbmtt.adapter.ResourceAdapter
 import com.example.antoanbmtt.databinding.FragmentCloudStorageBinding
 import com.example.antoanbmtt.fragment.ResourceDetailsBottomSheetFragment
@@ -59,7 +60,7 @@ class CloudStorageFragment : Fragment() {
                     ResourceDetailsBottomSheetFragment(
                         isFavourite,
                         {
-
+                            findNavController().navigate(CloudStorageFragmentDirections.actionCloudStorageFragmentToResourceDetailsFragment(id))
                         },
                         {
                             viewModel.updateFavourite(id,!isFavourite)

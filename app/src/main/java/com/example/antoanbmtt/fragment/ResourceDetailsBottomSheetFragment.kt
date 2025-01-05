@@ -55,17 +55,17 @@ class ResourceDetailsBottomSheetFragment(
                             dialog, _ -> dialog.dismiss()
                     }
                     .setNegativeButton(getString(R.string.yes_label)){ _, _ ->
-                        delete.invoke()
                         dismiss()
+                        delete.invoke()
                     }.create().show()
             }
             shareLink.setOnClickListener {
-                sl.invoke()
                 dismiss()
+                sl.invoke()
             }
             download.setOnClickListener {
-                dl.invoke()
                 dismiss()
+                dl.invoke()
             }
         }
     }

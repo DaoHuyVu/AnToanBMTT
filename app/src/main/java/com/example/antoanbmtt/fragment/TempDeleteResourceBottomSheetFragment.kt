@@ -11,6 +11,7 @@ import com.example.antoanbmtt.databinding.FragmentTempDeleteResourceBottomSheetB
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 class TempDeleteResourceBottomSheetFragment(
+    private val showInfo : () -> Unit,
     private val restoreCallback : () -> Unit,
     private val deleteCallback : () -> Unit,
 ) : BottomSheetDialogFragment() {
@@ -27,6 +28,10 @@ class TempDeleteResourceBottomSheetFragment(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.apply {
+            information.setOnClickListener {
+                showInfo.invoke()
+                dismiss()
+            }
             restore.setOnClickListener {
                 restoreCallback.invoke()
                 dismiss()

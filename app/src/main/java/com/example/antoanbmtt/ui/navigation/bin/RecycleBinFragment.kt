@@ -6,11 +6,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.example.antoanbmtt.adapter.TempDeleteResourceAdapter
 import com.example.antoanbmtt.databinding.FragmentRecycleBinBinding
 import com.example.antoanbmtt.fragment.TempDeleteResourceBottomSheetFragment
+import com.example.antoanbmtt.helper.Util
 import com.example.antoanbmtt.helper.showToast
 import dagger.hilt.android.AndroidEntryPoint
+import java.io.File
 
 @AndroidEntryPoint
 class RecycleBinFragment : Fragment() {
@@ -32,11 +35,20 @@ class RecycleBinFragment : Fragment() {
                 refreshLayout.isRefreshing = false
             }
             val adapter = TempDeleteResourceAdapter(
-                {
-                    //  MUST IMPLEMENT
+                {   uri ->
+                    val tempFile = File(requireContext().cacheDir,uri)
+                    if(!tempFile.exists()){
+                        viewModel.getResourceContent(uri)
+                    }
+                    else{
+                        Util.openCacheFile(requireContext(),uri, Util.getMimeType(uri)!!)
+                    }
                 },
                 { id,isTempDelete ->
                    TempDeleteResourceBottomSheetFragment(
+                        {
+                            findNavController().navigate(RecycleBinFragmentDirections.actionRecycleBinFragmentToResourceDetailsFragment(id))
+                        },
                         {
                             viewModel.updateTempDelete(id,!isTempDelete)
                         },
@@ -61,6 +73,14 @@ class RecycleBinFragment : Fragment() {
                     viewModel.messageShown()
                 }
                 adapter.submitList(it.resources)
+            }
+            viewModel.resourceContent.observe(viewLifecycleOwner){
+                it.content?.let{ content ->
+                    val file = File(requireContext().cacheDir,it.uri!!)
+                    Util.writeToFile(content,file)
+                    Util.openCacheFile(requireContext(),it.uri,Util.getMimeType(it.uri)!!)
+                    viewModel.resetContent()
+                }
             }
         }
     }

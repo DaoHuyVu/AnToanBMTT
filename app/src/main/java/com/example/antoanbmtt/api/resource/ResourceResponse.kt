@@ -3,6 +3,7 @@ package com.example.antoanbmtt.api.resource
 import com.example.antoanbmtt.helper.formatDate
 import com.example.antoanbmtt.helper.toByteRepresentation
 import com.example.antoanbmtt.repository.resource.Resource
+import com.example.antoanbmtt.repository.resource.ResourceDetails
 
 data class ResourceResponse(
     val id : Long,
@@ -16,5 +17,10 @@ data class ResourceResponse(
 ){
     fun toResource() : Resource {
         return Resource(id,name,lastUpdate.formatDate(),capacity.toByteRepresentation(),uri,isFavourite,isTempDelete)
+    }
+    fun toResourceDetails() : ResourceDetails{
+        return ResourceDetails(
+            id,name,uploadTime.formatDate(),lastUpdate.formatDate(),capacity.toByteRepresentation(),uri,isFavourite,isTempDelete
+        )
     }
 }

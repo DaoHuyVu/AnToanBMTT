@@ -141,6 +141,13 @@ class ResourceRepository @Inject constructor(
             else ApiResult.Failure("Host error")
         }
     }
+    fun getResourceItem(id : Long) : ApiResult<ResourceDetails>{
+        val temp = resources.find { it.id == id }
+        if(temp != null){
+            return ApiResult.Success(temp.toResourceDetails())
+        }
+        return ApiResult.Failure("Can't find resource item")
+    }
     // Return resources displayed in UI ( a.k.a not temp deleted )
     private fun toUiResources() : List<Resource>{
         return resources.filter { !it.isTempDelete }.map{ resources -> resources.toResource()}

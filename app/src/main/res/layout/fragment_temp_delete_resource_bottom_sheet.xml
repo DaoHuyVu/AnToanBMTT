@@ -7,6 +7,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
     <TextView
+        android:id="@+id/information"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:drawablePadding="16dp"
+        android:padding="16dp"
+        android:text="Information"
+        app:drawableStartCompat="@drawable/baseline_info_outline_24"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <TextView
         android:id="@+id/restore"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -17,7 +29,7 @@
         app:drawableStartCompat="@drawable/baseline_restore_24"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/information" />
 
     <TextView
         android:id="@+id/delete"
