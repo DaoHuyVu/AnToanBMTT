@@ -19,6 +19,9 @@
         <action
             android:id="@+id/action_cloudStorageFragment_to_resourceDetailsFragment"
             app:destination="@id/resourceDetailsFragment" />
+        <action
+            android:id="@+id/action_cloudStorageFragment_to_shareDetailsFragment"
+            app:destination="@id/shareDetailsFragment" />
     </fragment>
     <fragment
         android:id="@+id/shareFragment"
@@ -46,6 +49,15 @@
         tools:layout="@layout/fragment_resource_details">
         <argument
             android:name="resourceId"
+            app:argType="long" />
+    </fragment>
+    <fragment
+        android:id="@+id/shareDetailsFragment"
+        android:name="com.example.antoanbmtt.ui.navigation.share_details.ShareDetailsFragment"
+        android:label="Share Details"
+        tools:layout="@layout/fragment_share_details" >
+        <argument
+            android:name="id"
             app:argType="long" />
     </fragment>
 </navigation>

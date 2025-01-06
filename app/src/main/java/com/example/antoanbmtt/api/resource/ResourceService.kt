@@ -30,4 +30,15 @@ interface ResourceService {
         @Field("fields") fields : String,
         @Field("id") id : Long
     ) : Response<ResourceResponse>
+    @PATCH("resource/password")
+    @FormUrlEncoded
+    suspend fun updateResourcePassword(
+        @Field("password") password : String,
+        @Field("id") id : Long
+    ) : Response<ResourceResponse>
+
+    @GET("resource/share/{uri}")
+    suspend fun getSharedResource(
+        @Path("uri") uri : String
+    ) : Response<SharedResource>
 }

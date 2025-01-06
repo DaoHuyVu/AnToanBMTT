@@ -8,5 +8,7 @@ data class ResourceDetails(
     val capacity : String,
     val uri : String,
     val isFavourite : Boolean,
-    val isTempDelete : Boolean
+    val isTempDelete : Boolean,
+    val isShared : Boolean,
+    val sharedAt : String? = null
 )

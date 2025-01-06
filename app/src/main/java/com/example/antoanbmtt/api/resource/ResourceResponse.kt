@@ -13,14 +13,16 @@ data class ResourceResponse(
     val capacity : Long,
     val uri : String,
     val isFavourite : Boolean,
-    val isTempDelete : Boolean
+    val isTempDelete : Boolean,
+    val sharedAt : String? = null,
+    val isShared : Boolean
 ){
     fun toResource() : Resource {
         return Resource(id,name,lastUpdate.formatDate(),capacity.toByteRepresentation(),uri,isFavourite,isTempDelete)
     }
     fun toResourceDetails() : ResourceDetails{
         return ResourceDetails(
-            id,name,uploadTime.formatDate(),lastUpdate.formatDate(),capacity.toByteRepresentation(),uri,isFavourite,isTempDelete
+            id,name,uploadTime.formatDate(),lastUpdate.formatDate(),capacity.toByteRepresentation(),uri,isFavourite,isTempDelete,isShared,sharedAt?.formatDate()
         )
     }
 }

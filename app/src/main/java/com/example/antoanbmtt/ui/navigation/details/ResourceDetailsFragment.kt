@@ -10,7 +10,6 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.example.antoanbmtt.databinding.FragmentResourceDetailsBinding
 import dagger.hilt.android.AndroidEntryPoint
-import dagger.hilt.android.lifecycle.withCreationCallback
 import javax.inject.Inject
 
 @AndroidEntryPoint

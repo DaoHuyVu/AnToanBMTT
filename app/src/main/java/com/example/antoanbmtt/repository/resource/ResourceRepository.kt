@@ -119,7 +119,7 @@ class ResourceRepository @Inject constructor(
                 ApiResult.Success(toDeletedResources())
             }
             else if(response.code() in 400..499)
-                ApiResult.Failure("Can't temp delete info")
+                ApiResult.Failure("Can't restore resource from recycle bin")
             else ApiResult.Failure("Host error")
         }
     }
@@ -147,6 +147,19 @@ class ResourceRepository @Inject constructor(
             return ApiResult.Success(temp.toResourceDetails())
         }
         return ApiResult.Failure("Can't find resource item")
+    }
+    suspend fun updateSharedPassword(id : Long, password : String) : ApiResult<ResourceDetails>{
+        return withContext(Dispatchers.IO){
+            val response = resourceService.updateResourcePassword(password,id)
+            if(response.isSuccessful){
+                val index = resources.indexOfFirst { it.id == id }
+                resources[index] = response.body()!!
+                ApiResult.Success(resources[index].toResourceDetails())
+            }
+            else if(response.code() in 400..499)
+                ApiResult.Failure("Can't update resource password")
+            else ApiResult.Failure("Host error")
+        }
     }
     // Return resources displayed in UI ( a.k.a not temp deleted )
     private fun toUiResources() : List<Resource>{

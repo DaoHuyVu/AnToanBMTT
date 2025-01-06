@@ -1,10 +1,9 @@
 package com.example.antoanbmtt.ui.login
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.antoanbmtt.api.login.AccountService
+import com.example.antoanbmtt.api.login.AuthService
 import com.example.antoanbmtt.api.login.LoginRequest
 import com.example.antoanbmtt.repository.UserDataStore
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -13,7 +12,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(
-    private val accountService : AccountService,
+    private val authService : AuthService,
     private val dataStore : UserDataStore
 ) : ViewModel(){
     private val _loginState = MutableLiveData(LoginUiState())
@@ -37,7 +36,7 @@ class LoginViewModel @Inject constructor(
         else{
             _loginState.value = _loginState.value?.copy(isLoading = true, emailFieldEmpty = false, passwordFieldEmpty = false)
             viewModelScope.launch {
-                val response = accountService.login(LoginRequest(_loginState.value!!.userName!!.trim(),_loginState.value!!.password!!.trim()))
+                val response = authService.login(LoginRequest(_loginState.value!!.userName!!.trim(),_loginState.value!!.password!!.trim()))
                 if(response.isSuccessful){
                     val successResponse = response.body()
                     dataStore.saveUserInfo(successResponse!!.userInfo.email,successResponse.userInfo.userName,successResponse.accessToken)

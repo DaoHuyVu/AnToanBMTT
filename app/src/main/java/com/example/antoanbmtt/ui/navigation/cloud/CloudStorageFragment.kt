@@ -79,7 +79,7 @@ class CloudStorageFragment : Fragment() {
                             }
                         },
                         {
-
+                            findNavController().navigate(CloudStorageFragmentDirections.actionCloudStorageFragmentToShareDetailsFragment(id))
                         }
                     ).show(
                         requireActivity().supportFragmentManager,"TAG"

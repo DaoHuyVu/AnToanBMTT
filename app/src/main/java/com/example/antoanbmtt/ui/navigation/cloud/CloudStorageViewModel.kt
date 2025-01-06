@@ -75,7 +75,7 @@ class CloudStorageViewModel @Inject constructor(
         val fields = "{\"is_favourite\":$isFavourite}"
         _cloudStorageUiState.value = _cloudStorageUiState.value?.copy(isLoading = true)
         viewModelScope.launch {
-            when(val result = resourceRepository.tempDeleteResource(fields,id)){
+            when(val result = resourceRepository.updateFavourite(fields,id)){
                 is ApiResult.Success -> {
                     _cloudStorageUiState.value = _cloudStorageUiState.value?.copy(isLoading = false, resources = result.data)
                     _cloudStorageUiState.value = _cloudStorageUiState.value?.copy(isLoading = false)

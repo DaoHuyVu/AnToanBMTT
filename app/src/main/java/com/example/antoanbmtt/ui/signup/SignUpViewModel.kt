@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.antoanbmtt.api.login.AccountService
+import com.example.antoanbmtt.api.login.AuthService
 import com.example.antoanbmtt.api.login.SignUpRequest
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -12,7 +12,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SignUpViewModel @Inject constructor(
-    private val accountService: AccountService
+    private val authService: AuthService
 ) : ViewModel(){
     private val _signUpUiState = MutableLiveData(SignUpUiState())
     val signUpUiState : LiveData<SignUpUiState> get() = _signUpUiState
@@ -48,7 +48,7 @@ class SignUpViewModel @Inject constructor(
             }else{
                 _signUpUiState.value = _signUpUiState.value?.copy(isLoading = true, confirmPasswordNotMatch = false)
                 viewModelScope.launch {
-                    val response = accountService.signUp(SignUpRequest(_signUpUiState.value!!.userName!!.trim(),_signUpUiState.value!!.email!!.trim(),_signUpUiState.value!!.password!!.trim()))
+                    val response = authService.signUp(SignUpRequest(_signUpUiState.value!!.userName!!.trim(),_signUpUiState.value!!.email!!.trim(),_signUpUiState.value!!.password!!.trim()))
                     if(response.isSuccessful){
                         _signUpUiState.value = _signUpUiState.value?.copy(isLoading = false, isSignUpSuccessfully = true)
                     }

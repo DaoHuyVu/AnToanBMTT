@@ -1,5 +1,6 @@
 package com.example.antoanbmtt
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
@@ -15,11 +16,12 @@ import androidx.navigation.ui.setupWithNavController
 import com.example.antoanbmtt.databinding.ActivityMainBinding
 import com.example.antoanbmtt.databinding.DrawerAppHeaderBinding
 import com.example.antoanbmtt.repository.UserDataStore
+import com.example.antoanbmtt.ui.navigation.info.UserInfoFragment
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(),UserInfoFragment.LogoutEntryPoint{
     private lateinit var binding : ActivityMainBinding
     private lateinit var controller  : NavController
     private lateinit var appBarConfiguration: AppBarConfiguration
@@ -55,11 +57,11 @@ class MainActivity : AppCompatActivity() {
             bottomNavView.setupWithNavController(controller)
 
             controller.addOnDestinationChangedListener { _, destination, _ ->
-                if(destination.id in arrayOf(R.id.userInfoFragment,R.id.recycleBinFragment)){
-                    bottomNavView.visibility = View.GONE
+                if(destination.id in arrayOf(R.id.homeFragment,R.id.cloudStorageFragment,R.id.shareFragment)){
+                    bottomNavView.visibility = View.VISIBLE
                 }
                 else
-                    bottomNavView.visibility = View.VISIBLE
+                    bottomNavView.visibility = View.GONE
             }
         }
     }
@@ -69,19 +71,25 @@ class MainActivity : AppCompatActivity() {
         controller = navHostFragment.navController
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.app_bar_menu,menu)
-        return true
-    }
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when(item.itemId){
-            R.id.searchView -> {
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
-        }
-    }
+//    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+//        menuInflater.inflate(R.menu.app_bar_menu,menu)
+//        return true
+//    }
+//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+//        return when(item.itemId){
+//            R.id.searchView -> {
+//                true
+//            }
+//            else -> super.onOptionsItemSelected(item)
+//        }
+//    }
     override fun onSupportNavigateUp(): Boolean {
         return controller.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
+    }
+
+    override fun logout() {
+        startActivity(Intent(this,LoginActivity::class.java))
+        userDataStore.deleteUserInfo()
+        finish()
     }
 }

@@ -1,9 +1,12 @@
 package com.example.antoanbmtt.di
 
+import com.example.antoanbmtt.SERVER_HOST
 import com.example.antoanbmtt.annotation.TimeoutAnnotationOkHttp
 import com.example.antoanbmtt.annotation.TokenInterceptorOkHttp
-import com.example.antoanbmtt.api.login.AccountService
+import com.example.antoanbmtt.api.account.AccountService
+import com.example.antoanbmtt.api.login.AuthService
 import com.example.antoanbmtt.api.resource.ResourceService
+import com.example.antoanbmtt.api.user.UserService
 import com.example.antoanbmtt.interceptor.TokenInterceptor
 import dagger.Module
 import dagger.Provides
@@ -32,7 +35,7 @@ object AppModule {
     fun provideRetrofitBuilder(
         @TimeoutAnnotationOkHttp okHttpClient: OkHttpClient
     ) : Builder{
-        return Builder().baseUrl("https://terrier-modern-violently.ngrok-free.app")
+        return Builder().baseUrl(SERVER_HOST)
             .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create())
     }
@@ -45,10 +48,10 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideAccountService(
+    fun provideAuthService(
         builder : Builder
-    ) : AccountService{
-        return builder.build().create(AccountService::class.java)
+    ) : AuthService{
+        return builder.build().create(AuthService::class.java)
     }
     @Provides
     @Singleton
@@ -57,5 +60,21 @@ object AppModule {
         @TokenInterceptorOkHttp okHttpClient: OkHttpClient
     ) : ResourceService {
         return builder.client(okHttpClient).build().create(ResourceService::class.java)
+    }
+    @Provides
+    @Singleton
+    fun provideUserService(
+        builder: Builder,
+        @TokenInterceptorOkHttp okHttpClient: OkHttpClient
+    ) : UserService {
+        return builder.client(okHttpClient).build().create(UserService::class.java)
+    }
+    @Provides
+    @Singleton
+    fun provideAccountService(
+        builder: Builder,
+        @TokenInterceptorOkHttp okHttpClient: OkHttpClient
+    ) :  AccountService{
+        return builder.client(okHttpClient).build().create(AccountService::class.java)
     }
 }

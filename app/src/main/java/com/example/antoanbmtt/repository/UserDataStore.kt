@@ -18,6 +18,14 @@ class UserDataStore @Inject constructor(
             apply()
         }
     }
+    fun setEmail(email : String) = sharePreferences.edit().apply{
+        putString("email",email)
+        apply()
+    }
+    fun setUserName(userName : String) = sharePreferences.edit().apply{
+        putString("userName",userName)
+        apply()
+    }
     fun getUserName() = sharePreferences.getString("userName",null)
     fun getEmail() = sharePreferences.getString("email",null)
     fun getToken() = sharePreferences.getString("token",null)

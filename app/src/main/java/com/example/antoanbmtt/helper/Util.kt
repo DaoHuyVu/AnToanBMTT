@@ -109,7 +109,7 @@ class Util{
                     uri!!
                 ).use { outputStream ->
                     if (outputStream != null) {
-                        val buffer = ByteArray(4096)
+                        val buffer = ByteArray(65536)
                         var bytesRead: Int
 
                         while ((inputStream.read(buffer).also { bytesRead = it }) != -1) {

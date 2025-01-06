@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.navigation.share_details.ShareDetailsFragment"
+    android:padding="16dp">
+    <TextView
+        android:id="@+id/name_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+        android:text="Name"/>
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@id/status_label"
+        android:layout_marginStart="16dp"
+        tools:text="Filename"/>
+    <TextView
+        android:id="@+id/status_label"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/name"
+        app:layout_constraintStart_toStartOf="parent"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+        android:text="Status"/>
+    <TextView
+        android:id="@+id/status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@id/name"
+        app:layout_constraintStart_toEndOf="@id/status_label"
+        android:layout_marginStart="16dp"
+        tools:text="Shared"/>
+    <TextView
+        android:id="@+id/shared_at_label"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/status_label"
+        app:layout_constraintStart_toStartOf="parent"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+        android:text="Shared at"/>
+    <TextView
+        android:id="@+id/shared_at"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@id/status"
+        app:layout_constraintStart_toEndOf="@id/shared_at_label"
+        android:layout_marginStart="16dp"
+        tools:text="18:01"/>
+    <TextView
+        android:id="@+id/link_label"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/shared_at_label"
+        app:layout_constraintStart_toStartOf="parent"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+        android:text="Link"/>
+
+    <TextView
+        android:id="@+id/link"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintEnd_toStartOf="@+id/imageButton"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@id/link_label"
+        app:layout_constraintTop_toBottomOf="@id/shared_at"
+        tools:text="https://example.com.vn/linkNamedddddddddddddddddddddddddddddddddddd" />
+
+    <ImageView
+        android:id="@+id/imageButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="Copy link"
+        android:src="@drawable/baseline_content_copy_24"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/shared_at" />
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/layout"
+        style="@style/ThemeOverlay.Material3.TextInputEditText.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:endIconMode="password_toggle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/link">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="Password"
+            android:inputType="textPassword" />
+    </com.google.android.material.textfield.TextInputLayout>
+    <Button
+        android:id="@+id/update_password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/layout"
+        android:text="Update password"
+        android:layout_marginTop="32dp"
+        />
+    <Button
+        android:id="@+id/delete_link"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Delete link"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/update_password"/>
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+</androidx.constraintlayout.widget.ConstraintLayout>
