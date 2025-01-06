@@ -60,4 +60,9 @@
             android:name="id"
             app:argType="long" />
     </fragment>
+    <fragment
+        android:id="@+id/linkFragment"
+        android:name="com.example.antoanbmtt.ui.navigation.link.LinkFragment"
+        android:label="Link"
+        tools:layout="@layout/fragment_link" />
 </navigation>

@@ -56,7 +56,7 @@ class ShareDetailsFragment : Fragment() {
                         deleteLink.visibility = View.GONE
                         updatePassword.text = "Share"
                     }
-                    link.text = "${SERVER_HOST}/${it.uri}"
+                    link.text = it.uri
                 }
             }
 

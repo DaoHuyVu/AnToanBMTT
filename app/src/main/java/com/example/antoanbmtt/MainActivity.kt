@@ -8,6 +8,7 @@ import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
@@ -26,6 +27,7 @@ class MainActivity : AppCompatActivity(),UserInfoFragment.LogoutEntryPoint{
     private lateinit var controller  : NavController
     private lateinit var appBarConfiguration: AppBarConfiguration
     @Inject lateinit var userDataStore: UserDataStore
+    private var menu : Menu? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -57,11 +59,15 @@ class MainActivity : AppCompatActivity(),UserInfoFragment.LogoutEntryPoint{
             bottomNavView.setupWithNavController(controller)
 
             controller.addOnDestinationChangedListener { _, destination, _ ->
+                val menuItem = menu?.findItem(R.id.enter_link)
                 if(destination.id in arrayOf(R.id.homeFragment,R.id.cloudStorageFragment,R.id.shareFragment)){
                     bottomNavView.visibility = View.VISIBLE
+                    menuItem?.isVisible = true
                 }
-                else
+                else{
                     bottomNavView.visibility = View.GONE
+                    menuItem?.isVisible = false
+                }
             }
         }
     }
@@ -71,18 +77,20 @@ class MainActivity : AppCompatActivity(),UserInfoFragment.LogoutEntryPoint{
         controller = navHostFragment.navController
     }
 
-//    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-//        menuInflater.inflate(R.menu.app_bar_menu,menu)
-//        return true
-//    }
-//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-//        return when(item.itemId){
-//            R.id.searchView -> {
-//                true
-//            }
-//            else -> super.onOptionsItemSelected(item)
-//        }
-//    }
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.app_bar_menu,menu)
+        this.menu = menu
+        return true
+    }
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when(item.itemId){
+            R.id.enter_link -> {
+                controller.navigate(R.id.linkFragment)
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
     override fun onSupportNavigateUp(): Boolean {
         return controller.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }

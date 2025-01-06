@@ -2,9 +2,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/searchView"
-        android:icon="@drawable/baseline_search_24"
-        android:title="@string/search_label"
-        app:showAsAction="always"
+        android:id="@+id/enter_link"
+        android:icon="@drawable/baseline_link_24"
+        android:title="Enter link"
+        app:showAsAction="never"
         />
 </menu>

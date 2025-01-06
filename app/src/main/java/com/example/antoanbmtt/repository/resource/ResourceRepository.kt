@@ -5,9 +5,11 @@ import com.example.antoanbmtt.api.resource.DownloadResourceContent
 import com.example.antoanbmtt.api.resource.ResourceContent
 import com.example.antoanbmtt.api.resource.ResourceResponse
 import com.example.antoanbmtt.api.resource.ResourceService
+import com.example.antoanbmtt.api.resource.SharedResource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import okhttp3.MultipartBody
+import okhttp3.ResponseBody
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -16,7 +18,6 @@ class ResourceRepository @Inject constructor(
     private val resourceService: ResourceService
 ) {
     private var resources : MutableList<ResourceResponse> = mutableListOf()
-
     suspend fun getResources() : ApiResult<List<Resource>>{
         return withContext(Dispatchers.IO){
             val response = resourceService.getResources()
@@ -158,6 +159,32 @@ class ResourceRepository @Inject constructor(
             }
             else if(response.code() in 400..499)
                 ApiResult.Failure("Can't update resource password")
+            else ApiResult.Failure("Host error")
+        }
+    }
+    suspend fun getSharedResource(uri : String) : ApiResult<SharedResource>{
+        return withContext(Dispatchers.IO){
+            val response = resourceService.getSharedResource(uri)
+            if(response.isSuccessful){
+                ApiResult.Success(response.body()!!)
+            }
+            else if(response.code() == 400)
+                ApiResult.Failure("Wrong password")
+            else if(response.code() == 403)
+                ApiResult.Failure("Password is not provided")
+            else ApiResult.Failure("Host error")
+        }
+    }
+    suspend fun getSharedResourceContent(uri : String) : ApiResult<ResponseBody>{
+        return withContext(Dispatchers.IO){
+            val response = resourceService.getSharedResourceContent(uri)
+            if(response.isSuccessful){
+                ApiResult.Success(response.body()!!)
+            }
+            else if(response.code() == 400)
+                ApiResult.Failure("Wrong password")
+            else if(response.code() == 403)
+                ApiResult.Failure("Password is not provided")
             else ApiResult.Failure("Host error")
         }
     }

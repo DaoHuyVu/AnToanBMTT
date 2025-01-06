@@ -41,4 +41,8 @@ interface ResourceService {
     suspend fun getSharedResource(
         @Path("uri") uri : String
     ) : Response<SharedResource>
+    @GET("resource/share/{uri}/content")
+    suspend fun getSharedResourceContent(
+        @Path("uri") uri : String
+    ) : Response<ResponseBody>
 }
