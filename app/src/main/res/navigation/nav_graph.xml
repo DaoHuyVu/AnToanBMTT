@@ -66,4 +66,23 @@
         android:name="com.example.antoanbmtt.ui.navigation.link.LinkFragment"
         android:label="Link"
         tools:layout="@layout/fragment_link" />
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.example.antoanbmtt.ui.navigation.settings.SettingsFragment"
+        android:label="Settings">
+        <action
+            android:id="@+id/action_settingsFragment_to_pinCodeFragment"
+            app:destination="@id/pinCodeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/pinCodeFragment"
+        android:name="com.example.antoanbmtt.ui.navigation.settings.PinCodeFragment"
+        android:label="Pin"
+        tools:layout="@layout/fragment_pin_code" >
+        <action
+            android:id="@+id/action_pinCodeFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment"
+            app:popUpTo="@id/settingsFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
 </navigation>

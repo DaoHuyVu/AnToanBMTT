@@ -2,13 +2,11 @@ package com.example.antoanbmtt
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
@@ -19,7 +17,6 @@ import com.example.antoanbmtt.databinding.DrawerAppHeaderBinding
 import com.example.antoanbmtt.repository.UserDataStore
 import com.example.antoanbmtt.ui.navigation.info.UserInfoFragment
 import dagger.hilt.android.AndroidEntryPoint
-import java.io.File
 import javax.inject.Inject
 
 @AndroidEntryPoint

@@ -42,7 +42,10 @@ android {
     }
 }
 
-dependencies {
+dependencies{
+    implementation (libs.androidx.biometric)
+    implementation(libs.android.otpview.pinview.otpview)
+    implementation(libs.androidx.preference.ktx)
     implementation(libs.androidx.swiperefreshlayout)
     // https://mvnrepository.com/artifact/androidx.lifecycle/lifecycle-viewmodel-ktx
     runtimeOnly(libs.androidx.lifecycle.viewmodel.ktx)

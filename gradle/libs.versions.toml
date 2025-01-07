@@ -1,5 +1,6 @@
 [versions]
 agp = "8.7.2"
+biometric = "1.1.0"
 converterMoshi = "2.11.0"
 datastorePreferences = "1.1.1"
 fragmentKtx = "1.8.5"
@@ -17,10 +18,15 @@ activity = "1.9.3"
 constraintlayout = "2.2.0"
 navigationFragment = "2.8.4"
 navigationSafeArgsGradlePlugin = "2.8.5"
+otpview = "v1.1.2"
+otpviewCompose = "3.1.0"
+preferenceKtx = "1.2.1"
 retrofit = "2.11.0"
 swiperefreshlayout = "1.2.0-alpha01"
 
 [libraries]
+android-otpview-pinview-otpview = { module = "com.github.mukeshsolanki.android-otpview-pinview:otpview", version.ref = "otpviewCompose" }
+androidx-biometric = { module = "androidx.biometric:biometric", version.ref = "biometric" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 androidx-datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "datastorePreferences" }
 androidx-fragment-ktx = { module = "androidx.fragment:fragment-ktx", version.ref = "fragmentKtx" }
@@ -29,6 +35,7 @@ androidx-navigation-fragment = { module = "androidx.navigation:navigation-fragme
 androidx-navigation-runtime-ktx = { module = "androidx.navigation:navigation-runtime-ktx", version.ref = "navigationFragment" }
 androidx-navigation-safe-args-gradle-plugin = { module = "androidx.navigation:navigation-safe-args-gradle-plugin", version.ref = "navigationSafeArgsGradlePlugin" }
 androidx-navigation-ui = { module = "androidx.navigation:navigation-ui-ktx", version.ref = "navigationFragment" }
+androidx-preference-ktx = { module = "androidx.preference:preference-ktx", version.ref = "preferenceKtx" }
 androidx-swiperefreshlayout = { module = "androidx.swiperefreshlayout:swiperefreshlayout", version.ref = "swiperefreshlayout" }
 converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "converterMoshi" }
 hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hiltAndroid" }
@@ -40,6 +47,8 @@ androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 androidx-activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
 androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
+otpview = { module = "com.github.aabhasr1:OtpView", version.ref = "otpview" }
+otpview-compose = { module = "com.github.mukeshsolanki.android-otpview-pinview:otpview-compose", version.ref = "otpviewCompose" }
 retrofit2-retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
 
 [plugins]

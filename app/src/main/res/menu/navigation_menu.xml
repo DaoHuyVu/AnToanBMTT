@@ -12,7 +12,7 @@
            android:title="@string/recycle_bin_nav_view_title"
            android:icon="@drawable/baseline_recycling_24"/>
        <item
-           android:id="@+id/settings"
+           android:id="@+id/settingsFragment"
            android:title="@string/settings_nav_view_title"
            android:icon="@drawable/baseline_settings_24"/>
    </group>
