@@ -47,4 +47,9 @@ interface ResourceService {
     ) : Response<ResponseBody>
     @GET("resource/share")
     suspend fun getReceivedResources() : Response<List<SharedResource>>
+    @PATCH("resource/link/delete")
+    @FormUrlEncoded
+    suspend fun deleteLink(
+        @Field("uri") uri : String
+    ) : Response<ResourceResponse>
 }

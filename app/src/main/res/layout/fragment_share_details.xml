@@ -14,14 +14,18 @@
         app:layout_constraintStart_toStartOf="parent"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
         android:text="Name"/>
+
     <TextView
         android:id="@+id/name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toEndOf="@id/status_label"
         android:layout_marginStart="16dp"
-        tools:text="Filename"/>
+        android:layout_marginEnd="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@id/status_label"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Filename" />
     <TextView
         android:id="@+id/status_label"
         android:layout_width="wrap_content"

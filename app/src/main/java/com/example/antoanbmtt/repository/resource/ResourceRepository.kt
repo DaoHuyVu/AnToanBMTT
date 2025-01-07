@@ -202,6 +202,19 @@ class ResourceRepository @Inject constructor(
             else ApiResult.Failure("Host error")
         }
     }
+    suspend fun deleteLink(uri : String) : ApiResult<ResourceDetails>{
+        return withContext(Dispatchers.IO){
+            val response = resourceService.deleteLink(uri)
+            if(response.isSuccessful){
+                val index = resources.indexOfFirst { it.uri == uri }
+                resources[index] = response.body()!!
+                ApiResult.Success(resources[index].toResourceDetails())
+            }
+            else if(response.code() in 400..499)
+                ApiResult.Failure("Can't delete link")
+            else ApiResult.Failure("Host error")
+        }
+    }
     // Return resources displayed in UI ( a.k.a not temp deleted )
     private fun toUiResources() : List<Resource>{
         return resources.filter { !it.isTempDelete }.map{ resources -> resources.toResource()}

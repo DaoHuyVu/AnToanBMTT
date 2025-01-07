@@ -52,7 +52,17 @@ class ShareDetailsViewModel @AssistedInject constructor(
         }
     }
     fun deleteLink(){
-
+        _sharedDetailsUiState.value = _sharedDetailsUiState.value?.copy(isLoading = true)
+        viewModelScope.launch {
+            when(val result = resourceRepository.deleteLink(sharedDetailsUiState.value?.resource!!.uri)){
+                is ApiResult.Success -> {
+                    _sharedDetailsUiState.value = _sharedDetailsUiState.value?.copy(isLoading = false, resource = result.data, password = null)
+                }
+                is ApiResult.Failure -> {
+                    _sharedDetailsUiState.value = _sharedDetailsUiState.value?.copy(isLoading = false, errorMessage = result.message)
+                }
+            }
+        }
     }
     @AssistedFactory
     interface SharedDetailsViewModelFactory{
