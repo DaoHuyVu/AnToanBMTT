@@ -3,14 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/homeFragment">
+    app:startDestination="@id/cloudStorageFragment">
 
-    <fragment
-        android:id="@+id/homeFragment"
-        android:name="com.example.antoanbmtt.ui.navigation.home.HomeFragment"
-        android:label="Home"
-        tools:layout="@layout/fragment_home" >
-    </fragment>
     <fragment
         android:id="@+id/cloudStorageFragment"
         android:name="com.example.antoanbmtt.ui.navigation.cloud.CloudStorageFragment"
@@ -27,7 +21,14 @@
         android:id="@+id/shareFragment"
         android:name="com.example.antoanbmtt.ui.navigation.share.ShareFragment"
         android:label="Share"
-        tools:layout="@layout/fragment_share" />
+        tools:layout="@layout/fragment_share" >
+        <action
+            android:id="@+id/action_shareFragment_to_resourceDetailsFragment"
+            app:destination="@id/resourceDetailsFragment" />
+        <action
+            android:id="@+id/action_shareFragment_to_shareDetailsFragment"
+            app:destination="@id/shareDetailsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/recycleBinFragment"
         android:name="com.example.antoanbmtt.ui.navigation.bin.RecycleBinFragment"

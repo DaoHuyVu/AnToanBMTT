@@ -25,28 +25,6 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Resource name . This is a really long long long long name" />
 
-        <ImageView
-            android:id="@+id/hasLink"
-            android:layout_width="16dp"
-            android:layout_height="16dp"
-            android:layout_margin="16dp"
-            android:contentDescription="hasLink"
-            android:src="@drawable/baseline_link_24"
-            android:visibility="invisible"
-            app:layout_constraintStart_toEndOf="@id/resource_name"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageView
-            android:id="@+id/favorite"
-            android:layout_width="16dp"
-            android:layout_height="16dp"
-            android:layout_margin="16dp"
-            android:contentDescription="favorite"
-            android:src="@drawable/baseline_favorite_24"
-            android:visibility="invisible"
-            app:layout_constraintStart_toEndOf="@id/hasLink"
-            app:layout_constraintTop_toTopOf="parent" />
-
         <TextView
             android:id="@+id/resource_size"
             android:layout_width="wrap_content"
@@ -57,18 +35,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/resource_name"
             tools:text="100,01KB" />
-
-        <TextView
-            android:id="@+id/resource_last_update"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:layout_marginBottom="16dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@id/resource_size"
-            app:layout_constraintTop_toBottomOf="@id/resource_name"
-            tools:text="08:50, 14 thg 6, 2023" />
-
         <ImageButton
             android:id="@+id/buttonMore"
             android:layout_width="32dp"
@@ -80,7 +46,6 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
         <View
             android:layout_width="match_parent"
             android:layout_height="2dp"

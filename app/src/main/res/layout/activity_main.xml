@@ -29,7 +29,7 @@
             app:defaultNavHost="true"
             app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
             android:layout_width="match_parent"
-            tools:layout="@layout/fragment_home"
+            tools:layout="@layout/fragment_cloud_storage"
             android:layout_height="match_parent"
             app:navGraph="@navigation/nav_graph"
             android:layout_marginBottom="56dp">

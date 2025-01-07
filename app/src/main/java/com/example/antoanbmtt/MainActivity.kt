@@ -19,6 +19,7 @@ import com.example.antoanbmtt.databinding.DrawerAppHeaderBinding
 import com.example.antoanbmtt.repository.UserDataStore
 import com.example.antoanbmtt.ui.navigation.info.UserInfoFragment
 import dagger.hilt.android.AndroidEntryPoint
+import java.io.File
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -50,7 +51,6 @@ class MainActivity : AppCompatActivity(),UserInfoFragment.LogoutEntryPoint{
             setSupportActionBar(topAppbar)
             appBarConfiguration = AppBarConfiguration(
                 setOf(R.id.shareFragment,
-                    R.id.homeFragment,
                     R.id.cloudStorageFragment),
                 drawerLayout
             )
@@ -60,7 +60,7 @@ class MainActivity : AppCompatActivity(),UserInfoFragment.LogoutEntryPoint{
 
             controller.addOnDestinationChangedListener { _, destination, _ ->
                 val menuItem = menu?.findItem(R.id.enter_link)
-                if(destination.id in arrayOf(R.id.homeFragment,R.id.cloudStorageFragment,R.id.shareFragment)){
+                if(destination.id in arrayOf(R.id.cloudStorageFragment,R.id.shareFragment)){
                     bottomNavView.visibility = View.VISIBLE
                     menuItem?.isVisible = true
                 }
@@ -98,6 +98,9 @@ class MainActivity : AppCompatActivity(),UserInfoFragment.LogoutEntryPoint{
     override fun logout() {
         startActivity(Intent(this,LoginActivity::class.java))
         userDataStore.deleteUserInfo()
+        cacheDir.listFiles()?.forEach {
+            it.delete()
+        }
         finish()
     }
 }

@@ -30,6 +30,9 @@ class ResourceRepository @Inject constructor(
             else ApiResult.Failure("Host error")
         }
     }
+    fun getSharedResources() : List<Resource>{
+        return toSharedResources()
+    }
     suspend fun getTempDeleteResources() : ApiResult<List<Resource>>{
         return withContext(Dispatchers.IO){
             val response = resourceService.getResources()
@@ -181,6 +184,17 @@ class ResourceRepository @Inject constructor(
             if(response.isSuccessful){
                 ApiResult.Success(response.body()!!)
             }
+            else if(response.code() in 400..499)
+                ApiResult.Failure("Can't get received resources")
+            else ApiResult.Failure("Host error")
+        }
+    }
+    suspend fun getReceivedResources() : ApiResult<List<SharedResource>>{
+        return withContext(Dispatchers.IO){
+            val response = resourceService.getReceivedResources()
+            if(response.isSuccessful){
+                ApiResult.Success(response.body()!!)
+            }
             else if(response.code() == 400)
                 ApiResult.Failure("Wrong password")
             else if(response.code() == 403)
@@ -197,5 +211,8 @@ class ResourceRepository @Inject constructor(
     }
     private fun toDeletedResources() : List<Resource> {
         return resources.filter { it.isTempDelete }.map { resources -> resources.toResource() }
+    }
+    private fun toSharedResources() : List<Resource>{
+        return resources.filter { it.isShared }.map { resources -> resources.toResource() }
     }
 }
