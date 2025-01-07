@@ -1,4 +1,5 @@
 package com.example.antoanbmtt.ui.login
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -13,10 +14,15 @@ import javax.inject.Inject
 @HiltViewModel
 class LoginViewModel @Inject constructor(
     private val authService : AuthService,
-    private val dataStore : UserDataStore
+    private val dataStore : UserDataStore,
 ) : ViewModel(){
     private val _loginState = MutableLiveData(LoginUiState())
     val loginState : LiveData<LoginUiState> get() = _loginState
+    init{
+        if(dataStore.getEmailBiometrics() != null){
+            _loginState.value = _loginState.value?.copy(isBiometricsAuthenticated = true, usingBiometricsAuth = true, userName = dataStore.getEmailBiometrics())
+        }
+    }
     fun login(){
         if(_loginState.value?.userName.isNullOrEmpty() || _loginState.value?.password.isNullOrEmpty()){
             if(_loginState.value?.userName.isNullOrEmpty() && _loginState.value?.password.isNullOrEmpty()){
@@ -49,6 +55,25 @@ class LoginViewModel @Inject constructor(
                     else{
                         _loginState.value = _loginState.value?.copy(isLoading = false, message = "Host error")
                     }
+                }
+            }
+        }
+    }
+    fun loginBiometrics(){
+        _loginState.value = _loginState.value?.copy(passwordFieldEmpty = false, emailFieldEmpty = false, isLoading = true)
+        viewModelScope.launch {
+            val response = authService.loginBiometrics(dataStore.getEmailBiometrics()!!,dataStore.getUserNameBiometrics()!!)
+            if(response.isSuccessful){
+                val successResponse = response.body()
+                dataStore.saveUserInfo(successResponse!!.userInfo.email,successResponse.userInfo.userName,successResponse.accessToken)
+                _loginState.value = _loginState.value?.copy(isLoading = false, isLoginSuccessfully = true)
+            }
+            else{
+                if(response.code() == 443){
+                    _loginState.value = _loginState.value?.copy(isLoading = false, message = "Username or password incorrect")
+                }
+                else{
+                    _loginState.value = _loginState.value?.copy(isLoading = false, message = "Host error")
                 }
             }
         }

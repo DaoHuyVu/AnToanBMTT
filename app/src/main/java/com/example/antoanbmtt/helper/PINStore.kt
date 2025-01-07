@@ -16,11 +16,9 @@ class PINStore @Inject constructor(
     private val keyStore: KeyStore = KeyStore.getInstance("AndroidKeyStore").apply {
         load(null)
     }
-
     companion object {
         private const val KEY_ALIAS = "pin_hash_key"
     }
-
     fun storePin(pin: String) {
         val pinHash = hashPin(pin)
         try {
@@ -36,7 +34,6 @@ class PINStore @Inject constructor(
         val enteredPinHash = hashPin(enteredPin)
         return storedHash.contentEquals(enteredPinHash)
     }
-
     private fun hashPin(pin: String): ByteArray {
         return try {
             val digest = MessageDigest.getInstance("SHA-256")
@@ -45,7 +42,6 @@ class PINStore @Inject constructor(
             throw RuntimeException("SHA-256 algorithm not available", e)
         }
     }
-
     private fun getStoredPinHash(): ByteArray {
         try {
             val keyEntry = keyStore.getEntry(KEY_ALIAS, null) as? KeyStore.SecretKeyEntry

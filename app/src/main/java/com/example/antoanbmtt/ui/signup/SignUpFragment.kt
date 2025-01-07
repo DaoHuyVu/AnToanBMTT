@@ -48,6 +48,7 @@ class SignUpFragment : Fragment() {
             viewModel.signUpUiState.observe(viewLifecycleOwner){ uiState ->
                 if(uiState.isSignUpSuccessfully){
                     showToast("Sign up successfully\n Verify your email to activate the account")
+                    viewModel.messageShown()
                 }
                 if(uiState.isLoading){
                     progressBar.visibility = View.VISIBLE

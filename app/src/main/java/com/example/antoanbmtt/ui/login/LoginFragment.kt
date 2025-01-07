@@ -6,14 +6,18 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.datastore.dataStore
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.antoanbmtt.LoginActivity
 import com.example.antoanbmtt.R
 import com.example.antoanbmtt.databinding.FragmentLoginBinding
+import com.example.antoanbmtt.helper.BiometricsSecurity
 import com.example.antoanbmtt.helper.EditTextWatcher
 import com.example.antoanbmtt.helper.showToast
+import com.example.antoanbmtt.repository.UserDataStore
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class LoginFragment : Fragment() {
@@ -21,6 +25,8 @@ class LoginFragment : Fragment() {
     private val binding get() = _binding!!
     private var userScreenEntryPoint: UserScreenEntryPoint? = null
     private val viewModel by viewModels<LoginViewModel>()
+    @Inject lateinit var userDataStore: UserDataStore
+    @Inject lateinit var biometricsSecurity: BiometricsSecurity
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -40,6 +46,11 @@ class LoginFragment : Fragment() {
     override fun onStart() {
         super.onStart()
         binding.apply {
+            fingerprint.setOnClickListener {
+                biometricsSecurity.authenticate(this@LoginFragment){
+                    viewModel.loginBiometrics()
+                }
+            }
             loginBtn.setOnClickListener{
                 viewModel.login()
             }
@@ -82,6 +93,36 @@ class LoginFragment : Fragment() {
                     showToast(it)
                     viewModel.messageShown()
                 }
+            }
+            changeToBiometricAuth.text = "Change to ${userDataStore.getUserNameBiometrics()}"
+            changeAccount.setOnClickListener {
+                changeToBiometricAuth.visibility = View.VISIBLE
+                changeAccount.visibility = View.GONE
+                innerLayout.visibility = View.GONE
+                emailTextInput.visibility = View.VISIBLE
+            }
+            changeToBiometricAuth.setOnClickListener {
+                changeToBiometricAuth.visibility = View.GONE
+                changeAccount.visibility = View.VISIBLE
+                innerLayout.visibility = View.VISIBLE
+                emailTextInput.visibility = View.GONE
+            }
+            if(viewModel.loginState.value?.isBiometricsAuthenticated == true){
+                userNameBiometrics.text = userDataStore.getUserNameBiometrics()
+                if(viewModel.loginState.value?.usingBiometricsAuth == true){
+                    changeAccount.visibility = View.VISIBLE
+                    changeToBiometricAuth.visibility = View.GONE
+                }
+                else{
+                    changeAccount.visibility = View.GONE
+                    changeToBiometricAuth.visibility = View.VISIBLE
+                }
+            }
+            else{
+                innerLayout.visibility = View.GONE
+                emailTextInput.visibility = View.VISIBLE
+                changeAccount.visibility = View.GONE
+                changeToBiometricAuth.visibility = View.GONE
             }
         }
 

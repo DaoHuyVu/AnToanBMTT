@@ -32,6 +32,14 @@ class UserDataStore @Inject constructor(
             apply()
         }
     }
+    fun activateFingerprint(){
+        sharePreferences.edit().apply{
+            putString("userNameBiometrics",getUserName())
+            putString("emailBiometrics",getEmail())
+            apply()
+        }
+    }
+
     fun pinEnable() = sharePreferences.getBoolean("isPinEnable",false)
     fun setEmail(email : String) = sharePreferences.edit().apply{
         putString("email",email)
@@ -43,11 +51,24 @@ class UserDataStore @Inject constructor(
     }
     fun getUserName() = sharePreferences.getString("userName",null)
     fun getEmail() = sharePreferences.getString("email",null)
+    fun getUserNameBiometrics() = sharePreferences.getString("userNameBiometrics",null)
+    fun getEmailBiometrics() = sharePreferences.getString("emailBiometrics",null)
     fun getToken() = sharePreferences.getString("token",null)
 
     fun deleteUserInfo(){
         sharePreferences.edit().apply{
-            clear()
+            putString("userName",null)
+            putString("email",null)
+            putString("token",null)
+            putBoolean("isFingerprintEnable",false)
+            putBoolean("isPinEnable",false)
+            apply()
+        }
+    }
+    fun clearBiometric(){
+        sharePreferences.edit().apply{
+            putString("userNameBiometrics", null)
+            putString("emailBiometrics",null)
             apply()
         }
     }

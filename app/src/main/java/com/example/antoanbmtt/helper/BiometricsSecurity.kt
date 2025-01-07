@@ -5,11 +5,14 @@ import androidx.biometric.BiometricManager
 import androidx.biometric.BiometricPrompt
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import com.example.antoanbmtt.repository.UserDataStore
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class BiometricsSecurity @Inject constructor(){
+class BiometricsSecurity @Inject constructor(
+    private val userDataStore: UserDataStore
+){
     fun setUpBiometricsAuthentication(
         fragment : Fragment,
         onSucceed : () -> Unit,
@@ -18,12 +21,29 @@ class BiometricsSecurity @Inject constructor(){
         val biometricPrompt = BiometricPrompt(fragment, executor, object : BiometricPrompt.AuthenticationCallback() {
             override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult) {
                 super.onAuthenticationSucceeded(result)
+                userDataStore.activateFingerprint()
                 onSucceed.invoke()
             }
         })
         val promptInfo = BiometricPrompt.PromptInfo.Builder()
             .setTitle("Setup Biometric")
             .setSubtitle("Setting up authentication using your biometric credential")
+            .setNegativeButtonText("Cancel")
+            .build()
+        biometricPrompt.authenticate(promptInfo)
+    }
+    fun authenticate(fragment: Fragment,onSucceed: () -> Unit){
+        val executor = ContextCompat.getMainExecutor(fragment.requireActivity())
+        val biometricPrompt = BiometricPrompt(fragment, executor, object : BiometricPrompt.AuthenticationCallback() {
+            override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult) {
+                super.onAuthenticationSucceeded(result)
+                onSucceed.invoke()
+            }
+        })
+        val promptInfo = BiometricPrompt.PromptInfo.Builder()
+            .setTitle("Authentication required")
+            .setSubtitle("Verify identity")
+            .setDescription("Scan fingerprint to continue")
             .setNegativeButtonText("Cancel")
             .build()
         biometricPrompt.authenticate(promptInfo)

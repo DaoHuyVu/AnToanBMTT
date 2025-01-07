@@ -26,9 +26,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
         changePinPreference = findPreference("changePin")
 
         pinPreference?.isChecked = userDataStore.pinEnable()
-        fingerPrintPreference?.isVisible = pinPreference?.isChecked == true
-        changePinPreference?.isVisible = pinPreference?.isChecked == true
-
+        fingerPrintPreference?.isChecked = userDataStore.getEmailBiometrics() == userDataStore.getEmail()
         if(fingerprintAvailable){
             fingerPrintPreference?.setOnPreferenceChangeListener{ _, newValue ->
                 val value = newValue as Boolean
@@ -42,6 +40,8 @@ class SettingsFragment : PreferenceFragmentCompat() {
                 }
                 else{
                     userDataStore.setFingerprintEnable(false)
+                    userDataStore.clearBiometric()
+                    return@setOnPreferenceChangeListener true
                 }
                 false
             }
