@@ -3,7 +3,6 @@ package com.example.antoanbmtt.ui.navigation.link
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.example.antoanbmtt.api.ApiResult
 import com.example.antoanbmtt.repository.resource.ResourceRepository
@@ -49,7 +48,7 @@ class LinkViewModel @Inject constructor(
     fun getSharedContent() {
         _linkUiState.value = _linkUiState.value?.copy(isLoading = true)
         viewModelScope.launch {
-            when (val result = resourceRepository.getSharedResourceContent("${_inputUri.value!!}#${_password.value ?: ""}")) {
+            when (val result = resourceRepository.getSharedResourceContent("${_inputUri.value!!}#${_password.value ?:""}")) {
                 is ApiResult.Success -> {
                     _linkUiState.value =
                         _linkUiState.value?.copy(isLoading = false, resourceContent = result.data)

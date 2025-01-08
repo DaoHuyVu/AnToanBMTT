@@ -57,7 +57,6 @@ class UserInfoFragment : Fragment() {
                findNavController().navigate(UserInfoFragmentDirections.actionUserInfoFragmentToChangePasswordFragment())
             }
         }
-
     }
     override fun onDestroyView() {
         super.onDestroyView()

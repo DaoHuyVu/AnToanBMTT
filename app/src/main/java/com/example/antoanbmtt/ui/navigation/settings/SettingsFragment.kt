@@ -14,18 +14,13 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class SettingsFragment : PreferenceFragmentCompat() {
     private var fingerPrintPreference : SwitchPreferenceCompat? = null
-    private var pinPreference : SwitchPreferenceCompat? = null
-    private var changePinPreference : Preference? = null
     @Inject lateinit var biometricsSecurity : BiometricsSecurity
     @Inject lateinit var userDataStore: UserDataStore
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.preferences,rootKey)
         val fingerprintAvailable = biometricsSecurity.fingerprintAvailable(requireContext())
         fingerPrintPreference = findPreference("biometric")
-        pinPreference = findPreference("pin")
-        changePinPreference = findPreference("changePin")
 
-        pinPreference?.isChecked = userDataStore.pinEnable()
         fingerPrintPreference?.isChecked = userDataStore.getEmailBiometrics() == userDataStore.getEmail()
         if(fingerprintAvailable){
             fingerPrintPreference?.setOnPreferenceChangeListener{ _, newValue ->
@@ -49,21 +44,6 @@ class SettingsFragment : PreferenceFragmentCompat() {
         else{
             fingerPrintPreference?.isEnabled = false
             fingerPrintPreference?.summary = "Your device doesn't support fingerprint biometrics"
-        }
-        pinPreference?.setOnPreferenceChangeListener { _, newValue ->
-            val value = newValue as Boolean
-            if(value){
-                pinPreference?.isChecked = false
-                findNavController().navigate(SettingsFragmentDirections.actionSettingsFragmentToPinCodeFragment())
-                return@setOnPreferenceChangeListener false
-            }
-            else{
-                userDataStore.setPinEnable(false)
-                changePinPreference?.isVisible = false
-                fingerPrintPreference?.isVisible = false
-                fingerPrintPreference?.isChecked = false
-            }
-            true
         }
     }
 }

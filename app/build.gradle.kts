@@ -23,7 +23,7 @@ android {
 
     buildTypes {
         release {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -41,7 +41,6 @@ android {
         viewBinding = true
     }
 }
-
 dependencies{
     implementation (libs.androidx.biometric)
     implementation(libs.android.otpview.pinview.otpview)

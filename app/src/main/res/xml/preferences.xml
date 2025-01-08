@@ -3,15 +3,6 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <SwitchPreferenceCompat
-        app:key="pin"
-        app:title="Enable pin"
-        app:allowDividerBelow="true"
-        />
-    <Preference
-        app:key="changePin"
-        app:title="Change pin"
-        app:allowDividerBelow="true" />
-    <SwitchPreferenceCompat
         app:key="biometric"
         app:allowDividerBelow="true"
         app:title="Enable fingerprint"
