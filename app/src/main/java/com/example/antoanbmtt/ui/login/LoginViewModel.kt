@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.antoanbmtt.api.login.AuthService
 import com.example.antoanbmtt.api.login.LoginRequest
 import com.example.antoanbmtt.repository.UserDataStore
+import com.example.antoanbmtt.security.KeyPairUtil
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -15,6 +16,7 @@ import javax.inject.Inject
 class LoginViewModel @Inject constructor(
     private val authService : AuthService,
     private val dataStore : UserDataStore,
+    private val keyPairUtil: KeyPairUtil
 ) : ViewModel(){
     private val _loginState = MutableLiveData(LoginUiState())
     val loginState : LiveData<LoginUiState> get() = _loginState
@@ -46,7 +48,7 @@ class LoginViewModel @Inject constructor(
                 if(response.isSuccessful){
                     val successResponse = response.body()
                     dataStore.saveUserInfo(successResponse!!.userInfo.email,successResponse.userInfo.userName,successResponse.accessToken)
-                    _loginState.value = _loginState.value?.copy(isLoading = false, isLoginSuccessfully = true)
+                    exchangeKey()
                 }
                 else{
                     if(response.code() == 443){
@@ -66,7 +68,7 @@ class LoginViewModel @Inject constructor(
             if(response.isSuccessful){
                 val successResponse = response.body()
                 dataStore.saveUserInfo(successResponse!!.userInfo.email,successResponse.userInfo.userName,successResponse.accessToken)
-                _loginState.value = _loginState.value?.copy(isLoading = false, isLoginSuccessfully = true)
+                exchangeKey()
             }
             else{
                 if(response.code() == 443){
@@ -75,6 +77,15 @@ class LoginViewModel @Inject constructor(
                 else{
                     _loginState.value = _loginState.value?.copy(isLoading = false, message = "Host error")
                 }
+            }
+        }
+    }
+    private fun exchangeKey(){
+        viewModelScope.launch {
+            val response = authService.exchangePublicKey(keyPairUtil.publicKey.toString(),_loginState.value!!.userName!!.trim())
+            if(response.isSuccessful){
+                dataStore.setPublicKey(response.body()!!)
+                _loginState.value = _loginState.value?.copy(isLoading = false, isLoginSuccessfully = true)
             }
         }
     }

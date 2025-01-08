@@ -61,6 +61,7 @@ class UserDataStore @Inject constructor(
             putString("token",null)
             putBoolean("isFingerprintEnable",false)
             putBoolean("isPinEnable",false)
+            putString("publicKey",null)
             apply()
         }
     }
@@ -84,6 +85,12 @@ class UserDataStore @Inject constructor(
         sharePreferences.edit().apply{
             putString("userNameBiometrics", null)
             putString("emailBiometrics",null)
+            apply()
+        }
+    }
+    fun setPublicKey(key : String){
+        sharePreferences.edit().apply{
+            putString("publicKey",key)
             apply()
         }
     }

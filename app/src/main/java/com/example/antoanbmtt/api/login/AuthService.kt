@@ -18,4 +18,10 @@ interface AuthService {
         @Field("email") email : String,
         @Field("name") name : String
     ) : Response<LoginResponse>
+    @POST("/account/publicKey")
+    @FormUrlEncoded
+    suspend fun exchangePublicKey(
+        @Field("publicKey") key : String,
+        @Field("email") email : String
+    ) : Response<String>
 }
