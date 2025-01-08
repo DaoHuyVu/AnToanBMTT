@@ -42,7 +42,17 @@
         android:id="@+id/userInfoFragment"
         android:name="com.example.antoanbmtt.ui.navigation.info.UserInfoFragment"
         android:label="My account"
-        tools:layout="@layout/fragment_user_info" />
+        tools:layout="@layout/fragment_user_info" >
+        <action
+            android:id="@+id/action_userInfoFragment_to_changeEmailFragment"
+            app:destination="@id/changeEmailFragment" />
+        <action
+            android:id="@+id/action_userInfoFragment_to_changeUserInfoFragment"
+            app:destination="@id/changeUserInfoFragment" />
+        <action
+            android:id="@+id/action_userInfoFragment_to_changePasswordFragment"
+            app:destination="@id/changePasswordFragment" />
+    </fragment>
     <fragment
         android:id="@+id/resourceDetailsFragment"
         android:name="com.example.antoanbmtt.ui.navigation.details.ResourceDetailsFragment"
@@ -85,4 +95,25 @@
             app:popUpTo="@id/settingsFragment"
             app:popUpToInclusive="true" />
     </fragment>
+    <fragment
+        android:id="@+id/changeEmailFragment"
+        android:name="com.example.antoanbmtt.ui.navigation.info.change_email.ChangeEmailFragment"
+        android:label="Change Email"
+        tools:layout="@layout/fragment_change_email" />
+    <fragment
+        android:id="@+id/changeUserInfoFragment"
+        android:name="com.example.antoanbmtt.ui.navigation.info.change_userinfo.ChangeUserInfoFragment"
+        android:label="Change User Info"
+        tools:layout="@layout/fragment_change_user_info" >
+        <action
+            android:id="@+id/action_changeUserInfoFragment_to_userInfoFragment"
+            app:destination="@id/userInfoFragment"
+            app:popUpTo="@id/userInfoFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/changePasswordFragment"
+        android:name="com.example.antoanbmtt.ui.navigation.info.change_password.ChangePasswordFragment"
+        android:label="Change password"
+        tools:layout="@layout/fragment_change_password" />
 </navigation>

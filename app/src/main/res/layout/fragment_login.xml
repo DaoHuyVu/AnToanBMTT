@@ -137,7 +137,7 @@
         android:id="@+id/changeToBiometricAuth"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Change to DaoHuyVu"
+        android:text="Back to DaoHuyVu"
         android:layout_marginTop="16dp"
         android:visibility="gone"
         app:layout_constraintStart_toStartOf="@id/password_text_input"

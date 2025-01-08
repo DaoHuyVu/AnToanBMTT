@@ -65,6 +65,22 @@ class UserDataStore @Inject constructor(
             apply()
         }
     }
+    fun updateEmail(newEmail : String){
+        if(fingerprintEnable()){
+            sharePreferences.edit().apply {
+                putString("emailBiometrics",newEmail)
+            }.apply()
+        }
+    }
+    fun updateUserName(newName : String){
+        sharePreferences.edit().apply {
+            if(fingerprintEnable()){
+                putString("userNameBiometrics",newName)
+            }
+            putString("userName",newName)
+        }.apply()
+
+    }
     fun clearBiometric(){
         sharePreferences.edit().apply{
             putString("userNameBiometrics", null)

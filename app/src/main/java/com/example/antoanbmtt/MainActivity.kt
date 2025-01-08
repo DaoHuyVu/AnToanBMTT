@@ -26,22 +26,23 @@ class MainActivity : AppCompatActivity(),UserInfoFragment.LogoutEntryPoint{
     private lateinit var appBarConfiguration: AppBarConfiguration
     @Inject lateinit var userDataStore: UserDataStore
     private var menu : Menu? = null
+    private lateinit var headerView : View
+    private lateinit var headerLayout : DrawerAppHeaderBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setUpNavigation()
-        setUpUIComponent()
         bindUserDataToDrawer()
+        setUpUIComponent()
     }
     private fun bindUserDataToDrawer(){
-     val headerView = binding.navigationView.getHeaderView(0)
-        val headerLayout = DrawerAppHeaderBinding.bind(headerView)
+        headerView = binding.navigationView.getHeaderView(0)
+        headerLayout = DrawerAppHeaderBinding.bind(headerView)
         headerLayout.apply {
             userName.text = userDataStore.getUserName()
             userEmail.text = userDataStore.getEmail()
         }
-
     }
     private fun setUpUIComponent(){
         binding.apply{
@@ -60,6 +61,10 @@ class MainActivity : AppCompatActivity(),UserInfoFragment.LogoutEntryPoint{
                 if(destination.id in arrayOf(R.id.cloudStorageFragment,R.id.shareFragment)){
                     bottomNavView.visibility = View.VISIBLE
                     menuItem?.isVisible = true
+                    headerLayout.apply {
+                        userName.text = userDataStore.getUserName()
+                        userEmail.text = userDataStore.getEmail()
+                    }
                 }
                 else{
                     bottomNavView.visibility = View.GONE

@@ -94,7 +94,7 @@ class LoginFragment : Fragment() {
                     viewModel.messageShown()
                 }
             }
-            changeToBiometricAuth.text = "Change to ${userDataStore.getUserNameBiometrics()}"
+            changeToBiometricAuth.text = "Back to ${userDataStore.getUserNameBiometrics()}"
             changeAccount.setOnClickListener {
                 changeToBiometricAuth.visibility = View.VISIBLE
                 changeAccount.visibility = View.GONE
