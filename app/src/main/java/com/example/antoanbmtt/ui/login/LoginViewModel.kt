@@ -82,9 +82,9 @@ class LoginViewModel @Inject constructor(
     }
     private fun exchangeKey(){
         viewModelScope.launch {
-            val response = authService.exchangePublicKey(keyPairUtil.publicKey.toString(),_loginState.value!!.userName!!.trim())
+            val response = authService.exchangePublicKey(keyPairUtil.publicKey,_loginState.value!!.userName!!.trim())
             if(response.isSuccessful){
-                dataStore.setPublicKey(response.body()!!)
+                dataStore.setPublicKey(response.body()!!.publicKey)
                 _loginState.value = _loginState.value?.copy(isLoading = false, isLoginSuccessfully = true)
             }
         }

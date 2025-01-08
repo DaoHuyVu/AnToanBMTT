@@ -23,5 +23,5 @@ interface AuthService {
     suspend fun exchangePublicKey(
         @Field("publicKey") key : String,
         @Field("email") email : String
-    ) : Response<String>
+    ) : Response<PublicKey>
 }

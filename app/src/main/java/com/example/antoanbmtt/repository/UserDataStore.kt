@@ -94,4 +94,5 @@ class UserDataStore @Inject constructor(
             apply()
         }
     }
+    fun getPublicKey() = sharePreferences.getString("publicKey","")
 }

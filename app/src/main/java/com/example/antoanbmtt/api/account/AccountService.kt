@@ -19,5 +19,4 @@ interface AccountService {
         @Field("newEmail") newEmail : String,
         @Field("email") email : String
     ) : Response<Unit>
-
 }

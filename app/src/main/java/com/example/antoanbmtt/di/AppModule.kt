@@ -57,7 +57,8 @@ object AppModule {
     @Singleton
     fun provideResourceService(
         builder: Builder,
-        @TokenInterceptorOkHttp okHttpClient: OkHttpClient
+        @TokenInterceptorOkHttp okHttpClient: OkHttpClient,
+
     ) : ResourceService {
         return builder.client(okHttpClient).build().create(ResourceService::class.java)
     }
@@ -65,7 +66,7 @@ object AppModule {
     @Singleton
     fun provideUserService(
         builder: Builder,
-        @TokenInterceptorOkHttp okHttpClient: OkHttpClient
+        @TokenInterceptorOkHttp okHttpClient: OkHttpClient,
     ) : UserService {
         return builder.client(okHttpClient).build().create(UserService::class.java)
     }
@@ -73,7 +74,7 @@ object AppModule {
     @Singleton
     fun provideAccountService(
         builder: Builder,
-        @TokenInterceptorOkHttp okHttpClient: OkHttpClient
+        @TokenInterceptorOkHttp okHttpClient: OkHttpClient,
     ) :  AccountService{
         return builder.client(okHttpClient).build().create(AccountService::class.java)
     }
